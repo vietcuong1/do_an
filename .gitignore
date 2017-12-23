@@ -1,0 +1,15 @@
+/node_modules
+/public/storage
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+/public/poster
+/public/img
+/public/video
+/laravel
+/public/fonts
+string('birthday')
+string('country')
+string('name')
