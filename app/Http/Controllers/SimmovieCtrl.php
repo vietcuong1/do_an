@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ArtistMod;
-use App\Movie;
-use App\Recommendation;
-use URL;
-// use Model (ArtistMod)
-class ArtistCtrl extends Controller
+use App\SimMovie;
+class SimmovieCtrl extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +13,8 @@ class ArtistCtrl extends Controller
      */
     public function index()
     {
-        return view('artists.index');
+        //
+        return view('simmovie.index');
     }
 
     /**
@@ -27,8 +24,7 @@ class ArtistCtrl extends Controller
      */
     public function create()
     {
-        $data = ArtistMod::all(); // Lay het du lieu
-        return view('artists.insert')->with('v_artist',$data);
+        //
     }
 
     /**
@@ -39,12 +35,7 @@ class ArtistCtrl extends Controller
      */
     public function store(Request $request)
     {
-        // Lay gia tri tu form
-        $input = $request->all();
-        // Luu tat ca cac input tu form vao database
-        ArtistMod::create($input);
-        // Hien thi lai Form - Bao thanh cong
-        return redirect()->back()->with('insert_task_message','Insert sucessfully');
+        //
     }
 
     /**
@@ -55,9 +46,10 @@ class ArtistCtrl extends Controller
      */
     public function show($id)
     {
-        $Recommendation = Recommendation::find($id);
-        return view('artists.show',['Recommendation'=>$Recommendation]);
-        // return view('artists.index')->with('movie', $movie);
+        //
+        $SimMovies = SimMovie::where('movie_id', $id)->orderBy('coefficient','DESC')->paginate(9);
+
+        return view('simmovie.show',['SimMovies'=>$SimMovies]);
     }
 
     /**
@@ -68,8 +60,7 @@ class ArtistCtrl extends Controller
      */
     public function edit($id)
     {
-        $artist = ArtistMod::findOrFail($id);
-        return view('artists.edit')->with('v_artist',$artist);
+        //
     }
 
     /**
@@ -81,10 +72,7 @@ class ArtistCtrl extends Controller
      */
     public function update(Request $request, $id)
     {
-        $artist = ArtistMod::findOrFail($id);
-        $input = $request->all();
-        $artist->fill($input)->save();
-        return redirect()->back()->with('update_task_message','Update sucessfully');
+        //
     }
 
     /**
@@ -95,8 +83,6 @@ class ArtistCtrl extends Controller
      */
     public function destroy($id)
     {
-        $data = ArtistMod::findOrFail($id);
-        $data->delete();
-        return redirect()->back()->with('delete_task_message','Delete sucessfully');
+        //
     }
 }

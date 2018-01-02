@@ -89,7 +89,8 @@
                     @foreach($Recommendations as $mo)
 	  				<div class="col-md-4">
 	  					<div class="thumbnail">
-	  						<a href="{{ route('artists.show', ['id' => $mo->movie_id]) }}">
+                            <!-- <p>{{$mo->Movie->id}}</p> -->
+	  						<a href="{{ route('artists.show', ['id' => $mo->id]) }}">
 		  						<img src="poster/{{$mo->Movie->poster}}" alt="album1">
 		  					</a>
 	  					</div>

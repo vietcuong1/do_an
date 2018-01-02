@@ -8,7 +8,7 @@ class Recommendation extends Model
 {
     //
     protected $table='recommendations';
-    protected $fillable =['user_id','movie_id','rating'];
+    protected $fillable =['user_id','movie_id','rating','id'];
     public function movie(){
         return $this->belongsTo(Movie::class,"movie_id");
     }

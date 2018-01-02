@@ -9,7 +9,7 @@
      <title>Film Online</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -17,20 +17,30 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src ="js/css3-mediaqueries.js"></script>
-    <script type="text/javascript" href ="js/Search.js"></script>
-    <link rel="stylesheet" href="css/style_menu.css" type="text/css">
-    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="{{asset('/css/bootstrap/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/bootstrap/bootstrap-theme.min.css')}}">
+    <script src="{{asset('/js/js/jquery.min.js')}}"></script>
+    <script src="{{asset('/js/js/bootstrap.min.js')}}"></script>
+    <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
+    <style type="text/css">
+        .rating {
+            font-size: 30px;
+            color: yellow;
+        }
+    </style>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+    <script type="text/javascript" src ="{{ asset('/js/css3-mediaqueries.js') }}"></script>
+    <script type="text/javascript" href ="/js/Search.js"></script>
+    <link rel="stylesheet" href="{{ asset('/css/style_menu.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/css/slider.css') }}">
     <!-- <link href="css/bootstrap.css" rel="stylesheet"> -->
-    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
-    <link href="css/bootstrap-rating.css" rel="stylesheet">
-    <script type="text/javascript" src="js/bootstrap-rating.js"></script>
+    <script type="text/javascript" src="{{ asset('/js/jquery-1.11.3.min.js') }}"></script>
+    <link href="{{ asset('/css/bootstrap-rating.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('/js/bootstrap-rating.js') }}"></script>
   </head>
-  <body data-vide-bg="video/3" >
+  <body data-vide-bg="{{ asset('/video/3') }}" >
     <div id="menu">
         <div class="row">
             <div class="col-md-12">
@@ -166,8 +176,9 @@
             </div>
         </div>
     </div>
-    <script src="/js/app.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
+    <script src="{{ asset('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js') }}"></script>
     <script src="http://vodkabears.github.io/vide/js/jquery.vide.min.js"></script>
+    @yield('scripts')
   </body>
 </html>

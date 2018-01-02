@@ -1,6 +1,23 @@
 @extends ('layout')
 
 @section('content')
+<style type="text/css">
+    .symbol {
+       display: inline-block;
+       border-radius: 50%;
+       border: 5px double white;
+       width: 30px;
+       height: 30px;
+     }
+
+     .symbol-empty {
+       background-color: #ccc;
+     }
+
+     .symbol-filled {
+       background-color: yellow;
+     }
+</style>
     <div class="container">
         <div class="row">
             <div class="col-md-9">
@@ -9,26 +26,17 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="thumbnail">
-                            <a href="#">
-                                <img src="{{ asset('poster/'.$Recommendation->Movie->poster) }}" alt="album1">
+                            <a href="">
+                                <img src="img/BXH/pic0006.jpg" alt="album1">
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-8">
-                        <!-- <p>{{$Recommendation->Movie->poster}}</p> -->
-                        <h2 style="color: white">{{$Recommendation->Movie->title}}</h2>
+                    <div class="col-md-4">
+                        <h2 style="color: white">Justice League</h2>
                         <p style="color: white">Đánh giá dự kiến</p>
-<!--
-                        <input type="hidden" class="rating" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" value="{{$Recommendation->rating}}" /> -->
-
-
-                        <div id="movie-rating" class="rating" data-current-rate="{{$Recommendation->rating}}"></div>
-
+                        <input type="hidden" class="rating" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" value="3" />
                         <p></p>
                         <button type="button" class="btn btn-primary btn lg">Xem phim</button>
-                        <button type="submit" class="btn btn-primary btn lg">
-                            <a href="{{ route('simmovie.show', ['id' => $Recommendation->movie_id]) }}" style="color: white">Các phim tương tự</a>
-                        </button>
                     </div>
 
                 </div>
@@ -41,19 +49,19 @@
                     <a href=""> <h3 style="text-align: center;color: blue;">BẢNG XẾP HẠNG</h3></a> <hr>
                         <div class="caption">
                             <div>
-                                <img src="{{ asset('img/BXH/pic0006.jpg') }}" alt="picture" height="90" width="60">
+                                <img src="img/BXH/pic0006.jpg" alt="picture" height="90" width="60">
                                 <a href="{{ route('artists.index') }}" style="color:black;"><strong style="color: red;">01.</strong> Justice League</a>
                             </div>
                         </div>
                         <div class="caption">
                             <h5>
-                                <img src="{{ asset('img/BXH/pic0002.jpg') }}" alt="picture" height="90" width="60">
+                                <img src="img/BXH/pic0002.jpg" alt="picture" height="90" width="60">
                                 <a href="" target="_blank" style="color: black;"><strong style="color: green;">02.</strong> Pacific Rim 2</a>
                             </h5>
                         </div>
                         <div class="caption">
                             <h5 >
-                                <img src="{{ asset('img/BXH/pic0003.jpg') }}" alt="picture" height="90" width="60">
+                                <img src="img/BXH/pic0003.jpg" alt="picture" height="90" width="60">
                                 <a href="" target="_blank" style="color: black;"><strong style="color: yellow;">03.</strong> Sherlock Holmes</a>
                             </h5>
                         </div>
@@ -67,7 +75,7 @@
                 <hr style="border-color: white;">
                 <div class="row">
                     <div class="col-md-12">
-                        <p style="color: white">{{$Recommendation->Movie->plot}}</p>
+                        <p style="color: white">Phim Justice League: Câu chuyện xuất phát từ hành động xả thân của Superman, Batman quyết định bắt tay với Wonder Woman. Họ cùng nhau tập hợp nên một đội ngũ siêu nhân để chống lại hiểm họa mới đang trỗi dậy. Cuối cùng, dường như tất cả là quá muộn để cứu Trái đất khỏi một cuộc hủy diệt.</p>
                     </div>
 
                 </div>
@@ -81,22 +89,22 @@
                     <hr>
                     <div class="row" style="margin-bottom: 7px;">
                         <a href="">
-                            <img src="{{ asset('img/topic/pic00001.jpg') }}" alt="" width="90%">
+                            <img src="img/topic/pic00001.jpg" alt="" width="90%">
                         </a>
                     </div>
                     <div class="row" style="margin-bottom: 7px;">
                         <a href="">
-                            <img src="{{ asset('img/topic/pic00003.jpg') }}" alt="" width="90%">
+                            <img src="img/topic/pic00003.jpg" alt="" width="90%">
                         </a>
                     </div>
                     <div class="row" style="margin-bottom: 7px;">
                         <a href="">
-                            <img src="{{ asset('img/topic/pic00002.jpg') }}" alt="" width="90%">
+                            <img src="img/topic/pic00002.jpg" alt="" width="90%">
                         </a>
                     </div>
                     <div class="row" style="margin-bottom: 7px;">
                         <a href="">
-                            <img src="{{ asset('img/topic/pic00004.jpg') }}" alt="" width="90%">
+                            <img src="img/topic/pic00004.jpg" alt="" width="90%">
                         </a>
                     </div>
                 </div>
@@ -110,35 +118,3 @@
         </audio>
     </div>
 @stop
-
-@section('scripts')
-    <script type="text/javascript" src="{{ asset('vendor/rater/rater.min.js') }}"></script>
-    <script type="text/javascript">
-        console.log("setup rating ");
-        $(document).ready(function () {
-            console.log("setup rating ");
-            var options = {
-                max_value: 5,
-                step_size: 0.5,
-                initial_value: $('.rating').attr('data-current-rate'),
-                selected_symbol_type: 'utf8_star', // Must be a key from symbols
-                cursor: 'default',
-                readonly: false,
-                change_once: false, // Determines if the rating can only be set once
-                // ajax_method: 'POST',
-                // url: 'http://localhost/test.php',
-                additional_data: {}
-            }
-            $(".rating").rate(options);
-            $(".rating").on("change", function(ev, data){
-                //ajax to update rating
-                $.ajax({
-                    url: 'http://homestead.app:8000/film/uprate',
-                    type:"POST",
-                    data: {rating:data.to, movie_id:{{$Recommendation->movie_id}}, user_id:{{Auth::user()->id}}}
-                });
-                console.log(data.from, data.to);
-            });
-        });
-    </script>
-@endsection

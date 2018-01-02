@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\SingerMod;
-
-class SingerCtrl extends Controller
+use App\Movie;
+use DB;
+class FilmCtrl extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,20 @@ class SingerCtrl extends Controller
      */
     public function index()
     {
-        $data = SingerMod::paginate(10); // Lay het du lieu
-        return view('singers.index')->with('v_singer',$data);
+        //
     }
 
+    public function uprate(Request $request)
+    {
+        //
+        $status = DB::table('ratings')->insert(
+            ['user_id' => $request->user_id, 'movie_id' => $request->movie_id, 'rating' => $request->rating]
+        );
+            if($status)
+                return 'OK';
+            else
+                return 'Not OK';
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -25,8 +35,7 @@ class SingerCtrl extends Controller
      */
     public function create()
     {
-        $data = SingerMod::all(); // Lay het du lieu
-        return view('singers.insert')->with('v_singer',$data);
+        //
     }
 
     /**
@@ -37,12 +46,8 @@ class SingerCtrl extends Controller
      */
     public function store(Request $request)
     {
-        // Lay gia tri tu form
-        $input = $request->all();
-        // Luu tat ca cac input tu form vao database
-        SingerMod::create($input);
-        // Hien thi lai Form - Bao thanh cong
-        return redirect()->back()->with('insert_task_message','Insert sucessfully');
+        //
+        return view('film.index');
     }
 
     /**
@@ -53,8 +58,9 @@ class SingerCtrl extends Controller
      */
     public function show($id)
     {
-        $data = SingerMod::findOrFail($id);
-        return view('singers.show')->with('v_singer',$data);
+        //
+        $Movie = Movie::where('id', $id)->get();
+        return view('film.show',['Movie'=>$Movie]);
     }
 
     /**
@@ -65,8 +71,7 @@ class SingerCtrl extends Controller
      */
     public function edit($id)
     {
-        $singer = SingerMod::findOrFail($id);
-        return view('singers.edit')->with('v_singer',$singer);
+        //
     }
 
     /**
@@ -78,10 +83,7 @@ class SingerCtrl extends Controller
      */
     public function update(Request $request, $id)
     {
-        $singer = SingerMod::findOrFail($id);
-        $input = $request->all();
-        $singer->fill($input)->save();
-        return redirect()->back()->with('update_task_message','Update sucessfully');
+        //
     }
 
     /**
@@ -92,8 +94,6 @@ class SingerCtrl extends Controller
      */
     public function destroy($id)
     {
-        $data = SingerMod::findOrFail($id);
-        $data->delete();
-        return redirect()->back()->with('delete_task_message','Delete sucessfully');
+        //
     }
 }

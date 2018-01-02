@@ -7,30 +7,20 @@
                 <hr style="border-color: white;"> <a href="#"><h3 style="color: white;"> Phim </h3> </a>
                 <hr style="border-color: white;">
                 <div class="row">
+                @foreach($Movie as $mo)
                     <div class="col-md-4">
                         <div class="thumbnail">
                             <a href="#">
-                                <img src="{{ asset('poster/'.$Recommendation->Movie->poster) }}" alt="album1">
+                                <img src="{{ asset('poster/'.$mo->poster) }}" alt="album1">
                             </a>
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <!-- <p>{{$Recommendation->Movie->poster}}</p> -->
-                        <h2 style="color: white">{{$Recommendation->Movie->title}}</h2>
-                        <p style="color: white">Đánh giá dự kiến</p>
-<!--
-                        <input type="hidden" class="rating" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" value="{{$Recommendation->rating}}" /> -->
-
-
-                        <div id="movie-rating" class="rating" data-current-rate="{{$Recommendation->rating}}"></div>
-
-                        <p></p>
+                        <h2 style="color: white">{{$mo->title}}</h2>
+                        <div id="movie-rating" class="rating" data-current-rate></div>
                         <button type="button" class="btn btn-primary btn lg">Xem phim</button>
-                        <button type="submit" class="btn btn-primary btn lg">
-                            <a href="{{ route('simmovie.show', ['id' => $Recommendation->movie_id]) }}" style="color: white">Các phim tương tự</a>
-                        </button>
                     </div>
-
+                @endforeach
                 </div>
                 <div class="row">
 
@@ -67,7 +57,7 @@
                 <hr style="border-color: white;">
                 <div class="row">
                     <div class="col-md-12">
-                        <p style="color: white">{{$Recommendation->Movie->plot}}</p>
+                        <p style="color: white">{{$mo->plot}}</p>
                     </div>
 
                 </div>
@@ -110,7 +100,6 @@
         </audio>
     </div>
 @stop
-
 @section('scripts')
     <script type="text/javascript" src="{{ asset('vendor/rater/rater.min.js') }}"></script>
     <script type="text/javascript">
@@ -133,9 +122,8 @@
             $(".rating").on("change", function(ev, data){
                 //ajax to update rating
                 $.ajax({
-                    url: 'http://homestead.app:8000/film/uprate',
+                    url: '{!! route('film.uprate') !!}',
                     type:"POST",
-                    data: {rating:data.to, movie_id:{{$Recommendation->movie_id}}, user_id:{{Auth::user()->id}}}
                 });
                 console.log(data.from, data.to);
             });

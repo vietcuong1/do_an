@@ -22,7 +22,7 @@ class MusicCtrl extends Controller
      */
     public function index()
     {
-        $Recommendations = Recommendation::where('user_id', Auth::id())->orderBy('rating','DESC')->paginate(12);
+        $Recommendations = Recommendation::where('user_id', Auth::id())->orderBy('rating','desc')->orderBy('movie_id','asc')->paginate(12);
         return view('musics.index',['Recommendations'=>$Recommendations]);
     }
     /**
@@ -91,11 +91,9 @@ class MusicCtrl extends Controller
      */
     public function show($id)
     {
-        $data = MusicMod::findOrFail($id);
-        $song = MusicMod::paginate(15);
-        return view('musics.show')->with([
-            'v_music' => $data,'v_track' => $song
-        ]);
+        $movie = Movie::find($id);
+        return view('musics.show',['movie'=>$movie]);
+        // return view('artists.index')->with('movie', $movie);
     }
 
     /**

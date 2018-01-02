@@ -1,114 +1,105 @@
 @extends ('layout')
+
 @section('content')
-	<!DOCTYPE html>
-	<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Document</title>
-	</head>
-	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12" ">
-					<?php
-						$url = asset('uploads/')."/".$v_music->original_filename; 
-					 ?>
-					<div class="col-md-5" style="border: ridge";>
-							<div class="row" style="margin-top: 5px;">
-									<img src="{{ URL::asset('img/g1.gif') }}" class="img-responsive" alt="Cinque Terre" width="100%" height="280px" >
-							</div>
-							<hr style="margin: 0px;">
-							<div class="row">
-								<div id="player">
-									   <audio controls autoplay style="width: 470px;height: 40px;">
-									    <source src="{!! $url !!}" type="audio/mpeg">
-									               unsupported !! 
-									   </audio>
-								</div>
-							</div>
-							<div class="row" style="margin-top: 15px;">
-								<table class="table table-hover">
-									<thead>
-										
-									</thead>
-									<tbody>
-										<tr>
-											<th style="color: blue;">Song :</th>
-											<td>{{ $v_music ->original_filename }}</td>
-										</tr>
-										<tr>
-											<th style="color: blue;">Singser :</th>
-											<td>{{ $v_music ->singer }}</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					<div class="col-md-6" style="border: ridge;margin-left: 50px;">
-							<table class="table table-hover"  >
-								<thead>
-									<tr>
-										<td colspan="3" style="font-weight: bold; text-align: center;color: blue;background-color: white;">Track information</td>
-									</tr>
-								</thead>
-								<tbody >
-									<tr>
-											
-										<th>Tên bài hát</th>
-										<td>{{ $v_music ->original_filename }}</td>
-									
-									</tr>
-									<tr>
-										
-										<th>Sáng tác</th>
-										<td>{{ $v_music ->artist }}</td>
-										
-									</tr>
-									<tr>
-										
-										<th>Ca sĩ</th>
-										<td>{{ $v_music ->singer }}</td>
-									</tr>
-									<tr>
-										<th>Thể loại</th>
-										<td>{{ $v_music ->type }}</td>
-									</tr>
-									<tr>
-										<th>Quốc gia</th>
-										<td>{{ $v_music ->country }}</th>
-									</tr>
-									<tr>
-										<th>Năm</th>
-										<td>{{ $v_music ->year }}</td>
-									</tr>
-								</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<hr style="color: #698B22 ">
-			<h3 ><a href="">NGHE TIẾP</a></h3>
-			<div class="row">
-				<div class="col-md-5"><hr style="margin: 0px;border-color: #698B22"></div>
-			</div>
-			<div class="row">
-				<div class="col-md-5">
-					<table class="table table-hover">
-						<thead>
-						</thead>
-						<tbody>
-							@foreach($v_track as $_song =>$song_value) 
-									<tr>
-										<td><a href="{{ URL ::to('musics/'.$song_value->id)}}">{!! $song_value->original_filename !!}</a></td>
-										<td><img src="{{ URL::asset('img/play1.gif') }}" alt="" width="25" height="25"></td>
-									</tr>
-							@endforeach 
-						</tbody>
-					</table>
-					{!! $v_track->render() !!}
-				</div>
-			</div>
-		</div>
-	</body>
-	</html>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <hr style="border-color: white;"> <a href="#"><h3 style="color: white;"> Phim </h3> </a>
+                <hr style="border-color: white;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="#">
+                                <img src="{{ asset('poster/$movie->poster') }}" alt="album1">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <p>{!! $movie->poster !!}</p>
+                        <h2 style="color: white">Justice League</h2>
+                        <p style="color: white">Đánh giá dự kiến</p>
+                        <input type="hidden" class="rating" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" value="3" />
+                        <p></p>
+                        <button type="button" class="btn btn-primary btn lg">Xem phim</button>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                </div>
+            </div>
+            <div class="col-md-3" id="bxh" style="margin-top: 2px;">
+                <div class="thumbnail" style="border-color: blue;">
+                    <a href=""> <h3 style="text-align: center;color: blue;">BẢNG XẾP HẠNG</h3></a> <hr>
+                        <div class="caption">
+                            <div>
+                                <img src="{{ asset('img/BXH/pic0006.jpg') }}" alt="picture" height="90" width="60">
+                                <a href="{{ route('artists.index') }}" style="color:black;"><strong style="color: red;">01.</strong> Justice League</a>
+                            </div>
+                        </div>
+                        <div class="caption">
+                            <h5>
+                                <img src="{{ asset('img/BXH/pic0006.jpg') }}" alt="picture" height="90" width="60">
+                                <a href="" target="_blank" style="color: black;"><strong style="color: green;">02.</strong> Pacific Rim 2</a>
+                            </h5>
+                        </div>
+                        <div class="caption">
+                            <h5 >
+                                <img src="{{ asset('img/BXH/pic0003.jpg') }}" alt="picture" height="90" width="60">
+                                <a href="" target="_blank" style="color: black;"><strong style="color: yellow;">03.</strong> Sherlock Holmes</a>
+                            </h5>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <hr style="border-color: white;"> <a href="#"><h3 style="color: white;"> Nội dung phim </h3> </a>
+                <hr style="border-color: white;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p style="color: white">Phim Justice League: Câu chuyện xuất phát từ hành động xả thân của Superman, Batman quyết định bắt tay với Wonder Woman. Họ cùng nhau tập hợp nên một đội ngũ siêu nhân để chống lại hiểm họa mới đang trỗi dậy. Cuối cùng, dường như tất cả là quá muộn để cứu Trái đất khỏi một cuộc hủy diệt.</p>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="thumbnail" style="margin-top: 20px;border-color: green;">
+                    <h3 align="center"><a href="">CHỦ ĐỀ HOT</a></h3>
+                    <hr>
+                    <div class="row" style="margin-bottom: 7px;">
+                        <a href="">
+                            <img src="{{ asset('img/topic/pic00001.jpg') }}" alt="" width="90%">
+                        </a>
+                    </div>
+                    <div class="row" style="margin-bottom: 7px;">
+                        <a href="">
+                            <img src="{{ asset('img/topic/pic00003.jpg') }}" alt="" width="90%">
+                        </a>
+                    </div>
+                    <div class="row" style="margin-bottom: 7px;">
+                        <a href="">
+                            <img src="{{ asset('img/topic/pic00002.jpg') }}" alt="" width="90%">
+                        </a>
+                    </div>
+                    <div class="row" style="margin-bottom: 7px;">
+                        <a href="">
+                            <img src="{{ asset('img/topic/pic00004.jpg') }}" alt="" width="90%">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="player">
+        <audio controls autoplay hidden>
+         <source src="{{URL::asset('uploads/music.mp3')}}" type="audio/mpeg">
+                    unsupported !!
+        </audio>
+    </div>
 @stop
+
